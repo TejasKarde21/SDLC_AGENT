@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BA Agent Report</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f3f4f6;
+      color: #111827;
+    }
+    body {
+      margin: 0;
+      padding: 32px;
+      background: #f3f4f6;
+    }
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .hero {
+      margin-bottom: 24px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 2.5vw, 2.75rem);
+      letter-spacing: -0.03em;
+    }
+    .subtitle {
+      margin-top: 12px;
+      color: #4b5563;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 28px;
+      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+      padding: 28px;
+      margin-bottom: 24px;
+    }
+    .section-title {
+      margin: 0 0 16px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #111827;
+    }
+    .grid {
+      display: grid;
+      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+    .meta-item {
+      padding: 16px;
+      background: #f9fafb;
+      border-radius: 20px;
+      border: 1px solid #e5e7eb;
+    }
+    .meta-item strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #0f172a;
+    }
+    ul {
+      margin: 0;
+      padding-left: 20px;
+      line-height: 1.8;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px;
+    }
+    th, td {
+      text-align: left;
+      padding: 14px 12px;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: top;
+    }
+    th {
+      background: #f8fafc;
+      font-weight: 700;
+      color: #111827;
+    }
+    pre {
+      margin: 0;
+      background: #111827;
+      color: #f8fafc;
+      padding: 18px;
+      border-radius: 18px;
+      overflow-x: auto;
+      line-height: 1.6;
+    }
+    .empty {
+      color: #6b7280;
+      font-style: italic;
+      padding: 8px 0;
+    }
+    .footer {
+      margin-top: 16px;
+      color: #6b7280;
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <h1>Business Analyst Report</h1>
+      <p class="subtitle">Generated from the AI agent output. Open this file in a browser to view the formatted result.</p>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">Project Summary</h2>
+      <div class="grid">
+        <div class="meta-item"><strong>Project Name</strong>Hospital Management System</div>
+        <div class="meta-item"><strong>Objective</strong>To provide a comprehensive platform for patients to register, book appointments, and manage medical records, while enabling doctors to handle appointments, create EMRs, and process insurance claims efficiently.</div>
+        <div class="meta-item"><strong>Actors</strong><ul><li>Patient</li><li>Doctor</li><li>Insurance Company</li></ul></div>
+        <div class="meta-item"><strong>Modules</strong><ul><li>Patient Management</li><li>Doctor Management</li><li>Appointment Management</li><li>EMR Management</li><li>Insurance Claim Management</li></ul></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">Functional Requirements</h2>
+      
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Module</th>
+          <th>Actor</th>
+          <th>Requirement</th>
+          <th>Acceptance Criteria</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+          <tr>
+            <td>REQ-PAT-001</td>
+            <td>Patient Management</td>
+            <td>Patient</td>
+            <td>Register a new patient account with personal details and optional insurance information.</td>
+            <td>Patient receives a confirmation email and can log in immediately after registration.</td>
+          </tr>
+        
+          <tr>
+            <td>REQ-PAT-002</td>
+            <td>Patient Management</td>
+            <td>Patient</td>
+            <td>Login to the system using registered credentials.</td>
+            <td>System authenticates credentials and redirects to patient dashboard.</td>
+          </tr>
+        
+          <tr>
+            <td>REQ-PAT-003</td>
+            <td>Doctor Management</td>
+            <td>Patient</td>
+            <td>Search for doctors by specialty, name, or location.</td>
+            <td>Search results display doctor profiles with availability status.</td>
+          </tr>
+        
+          <tr>
+            <td>REQ-PAT-004</td>
+            <td>Appointment Management</td>
+            <td>Patient</td>
+            <td>Book an appointment with a selected doctor for a specific date and time.</td>
+            <td>Appointment request is queued and a notification is sent to the doctor.</td>
+          </tr>
+        
+          <tr>
+            <td>REQ-DOC-001</td>
+            <td>Appointment Management</td>
+            <td>Doctor</td>
+            <td>Receive appointment requests and view details.</td>
+            <td>Doctor can see patient information, requested time, and reason for visit.</td>
+          </tr>
+        
+          <tr>
+            <td>REQ-DOC-002</td>
+            <td>Appointment Management</td>
+            <td>Doctor</td>
+            <td>Accept or reject appointment requests.</td>
+            <td>Appointment status updates to accepted or rejected and patient is notified.</td>
+          </tr>
+        
+          <tr>
+            <td>REQ-EMR-001</td>
+            <td>EMR Management</td>
+            <td>Doctor</td>
+            <td>Create an EMR record after consultation.</td>
+            <td>EMR is linked to the patient and appointment and is stored securely.</td>
+          </tr>
+        
+          <tr>
+            <td>REQ-EMR-002</td>
+            <td>EMR Management</td>
+            <td>Doctor</td>
+            <td>Add diagnosis, medicines, and services to the EMR.</td>
+            <td>All entries are validated and saved; EMR can be viewed by the patient.</td>
+          </tr>
+        
+          <tr>
+            <td>REQ-CLAIM-001</td>
+            <td>Insurance Claim Management</td>
+            <td>System</td>
+            <td>Generate an insurance claim if the patient has insurance coverage.</td>
+            <td>Claim data is compiled from EMR and patient insurance details.</td>
+          </tr>
+        
+          <tr>
+            <td>REQ-CLAIM-002</td>
+            <td>Insurance Claim Management</td>
+            <td>System</td>
+            <td>Send the claim to the insurance company via the agreed interface.</td>
+            <td>Claim is transmitted successfully and a receipt is logged.</td>
+          </tr>
+        
+          <tr>
+            <td>REQ-CLAIM-003</td>
+            <td>Insurance Claim Management</td>
+            <td>Insurance Company</td>
+            <td>Approve or reject the claim.</td>
+            <td>Insurance company response updates claim status and notifies the patient and doctor.</td>
+          </tr>
+        
+      </tbody>
+    </table>
+  
+    </section>
+
+    <section class="card">
+      <div class="grid">
+        <div>
+          <h2 class="section-title">Non-functional Requirements</h2>
+          <ul><li>The system must be available 99.9% uptime.</li><li>All data must be encrypted at rest and in transit.</li><li>The application must comply with HIPAA regulations.</li><li>The system should support at least 10,000 concurrent users.</li><li>Response time for search and booking operations must be under 2 seconds.</li><li>The UI must be accessible (WCAG 2.1 AA).</li></ul>
+        </div>
+        <div>
+          <h2 class="section-title">Business Rules</h2>
+          <ul><li>Only registered patients can book appointments.</li><li>Only doctors with verified credentials can accept appointments.</li><li>An appointment can only be booked for a future date and time.</li><li>Claims are generated only if the patient has active insurance coverage.</li><li>Insurance claims must include diagnosis codes, medication codes, and service codes.</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="grid">
+        <div>
+          <h2 class="section-title">Validations</h2>
+          <ul><li>Email must be in a valid format.</li><li>Password must be at least 8 characters, include uppercase, lowercase, number, and special character.</li><li>Appointment date/time must not be in the past.</li><li>Diagnosis, medicine, and service codes must exist in the master code list.</li><li>Insurance policy number must be validated against the insurer&#39;s database.</li></ul>
+        </div>
+        <div>
+          <h2 class="section-title">Assumptions</h2>
+          <ul><li>Patients provide accurate insurance information during registration.</li><li>Doctors maintain an up-to-date availability schedule.</li><li>Insurance companies expose a RESTful API for claim submission.</li><li>The system will integrate with an external email/SMS service for notifications.</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="grid">
+        <div>
+          <h2 class="section-title">Dependencies</h2>
+          <ul><li>External email service provider (e.g., SendGrid).</li><li>External SMS gateway.</li><li>Insurance company claim API.</li><li>Database system (e.g., PostgreSQL).</li><li>Authentication provider (e.g., OAuth 2.0).</li></ul>
+        </div>
+        <div>
+          <h2 class="section-title">Clarification Questions</h2>
+          <ul><li>What specific fields are required for patient registration beyond basic contact information?</li><li>Should patients be able to reschedule or cancel appointments, and if so, what rules apply?</li><li>What format and data fields are required by the insurance company for claim submission?</li><li>Is there a requirement for patient or doctor portal access via mobile devices?</li><li>How should the system handle appointment conflicts if multiple patients request the same slot?</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">Raw AI Response</h2>
+      <pre>{
+  &quot;projectName&quot;: &quot;Hospital Management System&quot;,
+  &quot;projectObjective&quot;: &quot;To provide a comprehensive platform for patients to register, book appointments, and manage medical records, while enabling doctors to handle appointments, create EMRs, and process insurance claims efficiently.&quot;,
+  &quot;actors&quot;: [
+    &quot;Patient&quot;,
+    &quot;Doctor&quot;,
+    &quot;Insurance Company&quot;
+  ],
+  &quot;modules&quot;: [
+    &quot;Patient Management&quot;,
+    &quot;Doctor Management&quot;,
+    &quot;Appointment Management&quot;,
+    &quot;EMR Management&quot;,
+    &quot;Insurance Claim Management&quot;
+  ],
+  &quot;functionalRequirements&quot;: [
+    {
+      &quot;id&quot;: &quot;REQ-PAT-001&quot;,
+      &quot;module&quot;: &quot;Patient Management&quot;,
+      &quot;actor&quot;: &quot;Patient&quot;,
+      &quot;requirement&quot;: &quot;Register a new patient account with personal details and optional insurance information.&quot;,
+      &quot;acceptanceCriteria&quot;: &quot;Patient receives a confirmation email and can log in immediately after registration.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;REQ-PAT-002&quot;,
+      &quot;module&quot;: &quot;Patient Management&quot;,
+      &quot;actor&quot;: &quot;Patient&quot;,
+      &quot;requirement&quot;: &quot;Login to the system using registered credentials.&quot;,
+      &quot;acceptanceCriteria&quot;: &quot;System authenticates credentials and redirects to patient dashboard.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;REQ-PAT-003&quot;,
+      &quot;module&quot;: &quot;Doctor Management&quot;,
+      &quot;actor&quot;: &quot;Patient&quot;,
+      &quot;requirement&quot;: &quot;Search for doctors by specialty, name, or location.&quot;,
+      &quot;acceptanceCriteria&quot;: &quot;Search results display doctor profiles with availability status.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;REQ-PAT-004&quot;,
+      &quot;module&quot;: &quot;Appointment Management&quot;,
+      &quot;actor&quot;: &quot;Patient&quot;,
+      &quot;requirement&quot;: &quot;Book an appointment with a selected doctor for a specific date and time.&quot;,
+      &quot;acceptanceCriteria&quot;: &quot;Appointment request is queued and a notification is sent to the doctor.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;REQ-DOC-001&quot;,
+      &quot;module&quot;: &quot;Appointment Management&quot;,
+      &quot;actor&quot;: &quot;Doctor&quot;,
+      &quot;requirement&quot;: &quot;Receive appointment requests and view details.&quot;,
+      &quot;acceptanceCriteria&quot;: &quot;Doctor can see patient information, requested time, and reason for visit.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;REQ-DOC-002&quot;,
+      &quot;module&quot;: &quot;Appointment Management&quot;,
+      &quot;actor&quot;: &quot;Doctor&quot;,
+      &quot;requirement&quot;: &quot;Accept or reject appointment requests.&quot;,
+      &quot;acceptanceCriteria&quot;: &quot;Appointment status updates to accepted or rejected and patient is notified.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;REQ-EMR-001&quot;,
+      &quot;module&quot;: &quot;EMR Management&quot;,
+      &quot;actor&quot;: &quot;Doctor&quot;,
+      &quot;requirement&quot;: &quot;Create an EMR record after consultation.&quot;,
+      &quot;acceptanceCriteria&quot;: &quot;EMR is linked to the patient and appointment and is stored securely.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;REQ-EMR-002&quot;,
+      &quot;module&quot;: &quot;EMR Management&quot;,
+      &quot;actor&quot;: &quot;Doctor&quot;,
+      &quot;requirement&quot;: &quot;Add diagnosis, medicines, and services to the EMR.&quot;,
+      &quot;acceptanceCriteria&quot;: &quot;All entries are validated and saved; EMR can be viewed by the patient.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;REQ-CLAIM-001&quot;,
+      &quot;module&quot;: &quot;Insurance Claim Management&quot;,
+      &quot;actor&quot;: &quot;System&quot;,
+      &quot;requirement&quot;: &quot;Generate an insurance claim if the patient has insurance coverage.&quot;,
+      &quot;acceptanceCriteria&quot;: &quot;Claim data is compiled from EMR and patient insurance details.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;REQ-CLAIM-002&quot;,
+      &quot;module&quot;: &quot;Insurance Claim Management&quot;,
+      &quot;actor&quot;: &quot;System&quot;,
+      &quot;requirement&quot;: &quot;Send the claim to the insurance company via the agreed interface.&quot;,
+      &quot;acceptanceCriteria&quot;: &quot;Claim is transmitted successfully and a receipt is logged.&quot;
+    },
+    {
+      &quot;id&quot;: &quot;REQ-CLAIM-003&quot;,
+      &quot;module&quot;: &quot;Insurance Claim Management&quot;,
+      &quot;actor&quot;: &quot;Insurance Company&quot;,
+      &quot;requirement&quot;: &quot;Approve or reject the claim.&quot;,
+      &quot;acceptanceCriteria&quot;: &quot;Insurance company response updates claim status and notifies the patient and doctor.&quot;
+    }
+  ],
+  &quot;nonFunctionalRequirements&quot;: [
+    &quot;The system must be available 99.9% uptime.&quot;,
+    &quot;All data must be encrypted at rest and in transit.&quot;,
+    &quot;The application must comply with HIPAA regulations.&quot;,
+    &quot;The system should support at least 10,000 concurrent users.&quot;,
+    &quot;Response time for search and booking operations must be under 2 seconds.&quot;,
+    &quot;The UI must be accessible (WCAG 2.1 AA).&quot;
+  ],
+  &quot;businessRules&quot;: [
+    &quot;Only registered patients can book appointments.&quot;,
+    &quot;Only doctors with verified credentials can accept appointments.&quot;,
+    &quot;An appointment can only be booked for a future date and time.&quot;,
+    &quot;Claims are generated only if the patient has active insurance coverage.&quot;,
+    &quot;Insurance claims must include diagnosis codes, medication codes, and service codes.&quot;
+  ],
+  &quot;validations&quot;: [
+    &quot;Email must be in a valid format.&quot;,
+    &quot;Password must be at least 8 characters, include uppercase, lowercase, number, and special character.&quot;,
+    &quot;Appointment date/time must not be in the past.&quot;,
+    &quot;Diagnosis, medicine, and service codes must exist in the master code list.&quot;,
+    &quot;Insurance policy number must be validated against the insurer&#39;s database.&quot;
+  ],
+  &quot;assumptions&quot;: [
+    &quot;Patients provide accurate insurance information during registration.&quot;,
+    &quot;Doctors maintain an up-to-date availability schedule.&quot;,
+    &quot;Insurance companies expose a RESTful API for claim submission.&quot;,
+    &quot;The system will integrate with an external email/SMS service for notifications.&quot;
+  ],
+  &quot;dependencies&quot;: [
+    &quot;External email service provider (e.g., SendGrid).&quot;,
+    &quot;External SMS gateway.&quot;,
+    &quot;Insurance company claim API.&quot;,
+    &quot;Database system (e.g., PostgreSQL).&quot;,
+    &quot;Authentication provider (e.g., OAuth 2.0).&quot;
+  ],
+  &quot;clarificationQuestions&quot;: [
+    &quot;What specific fields are required for patient registration beyond basic contact information?&quot;,
+    &quot;Should patients be able to reschedule or cancel appointments, and if so, what rules apply?&quot;,
+    &quot;What format and data fields are required by the insurance company for claim submission?&quot;,
+    &quot;Is there a requirement for patient or doctor portal access via mobile devices?&quot;,
+    &quot;How should the system handle appointment conflicts if multiple patients request the same slot?&quot;
+  ]
+}</pre>
+    </section>
+
+    <div class="footer">Report generated by the Business Analyst Agent.</div>
+  </div>
+</body>
+</html>

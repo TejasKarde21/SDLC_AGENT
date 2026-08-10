@@ -1,0 +1,137 @@
+{
+  "projectName": "Hospital Management System",
+  "projectObjective": "To provide a comprehensive platform for patients to register, book appointments, and manage medical records, while enabling doctors to handle appointments, create EMRs, and process insurance claims efficiently.",
+  "actors": [
+    "Patient",
+    "Doctor",
+    "Insurance Company"
+  ],
+  "modules": [
+    "Patient Management",
+    "Doctor Management",
+    "Appointment Management",
+    "EMR Management",
+    "Insurance Claim Management"
+  ],
+  "functionalRequirements": [
+    {
+      "id": "REQ-PAT-001",
+      "module": "Patient Management",
+      "actor": "Patient",
+      "requirement": "Register a new patient account with personal details and optional insurance information.",
+      "acceptanceCriteria": "Patient receives a confirmation email and can log in immediately after registration."
+    },
+    {
+      "id": "REQ-PAT-002",
+      "module": "Patient Management",
+      "actor": "Patient",
+      "requirement": "Login to the system using registered credentials.",
+      "acceptanceCriteria": "System authenticates credentials and redirects to patient dashboard."
+    },
+    {
+      "id": "REQ-PAT-003",
+      "module": "Doctor Management",
+      "actor": "Patient",
+      "requirement": "Search for doctors by specialty, name, or location.",
+      "acceptanceCriteria": "Search results display doctor profiles with availability status."
+    },
+    {
+      "id": "REQ-PAT-004",
+      "module": "Appointment Management",
+      "actor": "Patient",
+      "requirement": "Book an appointment with a selected doctor for a specific date and time.",
+      "acceptanceCriteria": "Appointment request is queued and a notification is sent to the doctor."
+    },
+    {
+      "id": "REQ-DOC-001",
+      "module": "Appointment Management",
+      "actor": "Doctor",
+      "requirement": "Receive appointment requests and view details.",
+      "acceptanceCriteria": "Doctor can see patient information, requested time, and reason for visit."
+    },
+    {
+      "id": "REQ-DOC-002",
+      "module": "Appointment Management",
+      "actor": "Doctor",
+      "requirement": "Accept or reject appointment requests.",
+      "acceptanceCriteria": "Appointment status updates to accepted or rejected and patient is notified."
+    },
+    {
+      "id": "REQ-EMR-001",
+      "module": "EMR Management",
+      "actor": "Doctor",
+      "requirement": "Create an EMR record after consultation.",
+      "acceptanceCriteria": "EMR is linked to the patient and appointment and is stored securely."
+    },
+    {
+      "id": "REQ-EMR-002",
+      "module": "EMR Management",
+      "actor": "Doctor",
+      "requirement": "Add diagnosis, medicines, and services to the EMR.",
+      "acceptanceCriteria": "All entries are validated and saved; EMR can be viewed by the patient."
+    },
+    {
+      "id": "REQ-CLAIM-001",
+      "module": "Insurance Claim Management",
+      "actor": "System",
+      "requirement": "Generate an insurance claim if the patient has insurance coverage.",
+      "acceptanceCriteria": "Claim data is compiled from EMR and patient insurance details."
+    },
+    {
+      "id": "REQ-CLAIM-002",
+      "module": "Insurance Claim Management",
+      "actor": "System",
+      "requirement": "Send the claim to the insurance company via the agreed interface.",
+      "acceptanceCriteria": "Claim is transmitted successfully and a receipt is logged."
+    },
+    {
+      "id": "REQ-CLAIM-003",
+      "module": "Insurance Claim Management",
+      "actor": "Insurance Company",
+      "requirement": "Approve or reject the claim.",
+      "acceptanceCriteria": "Insurance company response updates claim status and notifies the patient and doctor."
+    }
+  ],
+  "nonFunctionalRequirements": [
+    "The system must be available 99.9% uptime.",
+    "All data must be encrypted at rest and in transit.",
+    "The application must comply with HIPAA regulations.",
+    "The system should support at least 10,000 concurrent users.",
+    "Response time for search and booking operations must be under 2 seconds.",
+    "The UI must be accessible (WCAG 2.1 AA)."
+  ],
+  "businessRules": [
+    "Only registered patients can book appointments.",
+    "Only doctors with verified credentials can accept appointments.",
+    "An appointment can only be booked for a future date and time.",
+    "Claims are generated only if the patient has active insurance coverage.",
+    "Insurance claims must include diagnosis codes, medication codes, and service codes."
+  ],
+  "validations": [
+    "Email must be in a valid format.",
+    "Password must be at least 8 characters, include uppercase, lowercase, number, and special character.",
+    "Appointment date/time must not be in the past.",
+    "Diagnosis, medicine, and service codes must exist in the master code list.",
+    "Insurance policy number must be validated against the insurer's database."
+  ],
+  "assumptions": [
+    "Patients provide accurate insurance information during registration.",
+    "Doctors maintain an up-to-date availability schedule.",
+    "Insurance companies expose a RESTful API for claim submission.",
+    "The system will integrate with an external email/SMS service for notifications."
+  ],
+  "dependencies": [
+    "External email service provider (e.g., SendGrid).",
+    "External SMS gateway.",
+    "Insurance company claim API.",
+    "Database system (e.g., PostgreSQL).",
+    "Authentication provider (e.g., OAuth 2.0)."
+  ],
+  "clarificationQuestions": [
+    "What specific fields are required for patient registration beyond basic contact information?",
+    "Should patients be able to reschedule or cancel appointments, and if so, what rules apply?",
+    "What format and data fields are required by the insurance company for claim submission?",
+    "Is there a requirement for patient or doctor portal access via mobile devices?",
+    "How should the system handle appointment conflicts if multiple patients request the same slot?"
+  ]
+}

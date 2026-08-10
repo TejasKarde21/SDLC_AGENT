@@ -1,0 +1,33 @@
+{
+  "name": "genai-sdlc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "generate": "npx tsx src/index.ts",
+    "dev": "vite --config ui/vite.config.mts",
+    "build": "vite build --config ui/vite.config.mts",
+    "preview": "vite preview --config ui/vite.config.mts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@openai/agents": "^0.14.3",
+    "dotenv": "^17.4.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react-swc": "^4.0.0",
+    "tsx": "^4.23.12",
+    "typescript": "^7.0.2",
+    "vite": "^5.4.0"
+  }
+}
