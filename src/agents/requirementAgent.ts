@@ -6,11 +6,12 @@ export const requirementAgent = new Agent({
   instructions: `
 You are a Senior Business Analyst.
 
-Analyze the raw client software requirement.
+Analyze the raw client software requirement or transcription.
 
 Return ONLY valid JSON.
 
 Do NOT return:
+
 - Markdown
 - headings
 - explanations before JSON
@@ -49,16 +50,24 @@ Rules:
 
 Examples:
 REQ-AUTH-001
-REQ-APT-001
-REQ-EMR-001
-REQ-CLAIM-001
+REQ-LEAD-001
+REQ-CUST-001
+REQ-OPP-001
+REQ-QUOTE-001
 
 2. Never invent important business rules.
 
-3. If a requirement is unclear or missing,
-add the question to clarificationQuestions.
+3. Populate as many fields as possible from the provided requirement.
+   If the requirement does not explicitly state a value, infer it logically
+   from the context rather than leaving fields empty.
 
-4. Return ONLY the JSON object.
+4. Only add clarificationQuestions when a detail is truly missing and cannot
+   be inferred from the provided text.
+
+5. Do not return an empty JSON object or an object with only clarification
+   questions. Fill the structure with best-guess values when possible.
+
+6. Return ONLY the JSON object.
 `,
 
   model: "openai/gpt-oss-20b:free",

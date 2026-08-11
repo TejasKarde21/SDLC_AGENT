@@ -1,35 +1,74 @@
 import { z } from "zod";
 
-export const requirementSchema = z.object({
-  projectName: z.string(),
 
-  projectObjective: z.string(),
+export const functionalRequirementSchema =
+  z.object({
 
-  actors: z.array(z.string()),
+    id: z.string(),
 
-  modules: z.array(z.string()),
+    module: z.string(),
 
-  functionalRequirements: z.array(
-    z.object({
-      id: z.string(),
-      module: z.string(),
-      actor: z.string(),
-      requirement: z.string(),
-      acceptanceCriteria: z.string(),
-    })
-  ),
+    actor: z.string(),
 
-  nonFunctionalRequirements: z.array(z.string()),
+    requirement: z.string(),
 
-  businessRules: z.array(z.string()),
+    acceptanceCriteria: z.string(),
 
-  validations: z.array(z.string()),
+  });
 
-  assumptions: z.array(z.string()),
 
-  dependencies: z.array(z.string()),
+export const requirementSchema =
+  z.object({
 
-  clarificationQuestions: z.array(z.string()),
-});
+    projectName:
+      z.string(),
 
-export type RequirementOutput = z.infer<typeof requirementSchema>;
+    projectObjective:
+      z.string(),
+
+    actors:
+      z.array(
+        z.string()
+      ),
+
+    modules:
+      z.array(
+        z.string()
+      ),
+
+    functionalRequirements:
+      z.array(
+        functionalRequirementSchema
+      ),
+
+    nonFunctionalRequirements:
+      z.array(
+        z.string()
+      ),
+
+    businessRules:
+      z.array(
+        z.string()
+      ),
+
+    validations:
+      z.array(
+        z.string()
+      ),
+
+    assumptions:
+      z.array(
+        z.string()
+      ),
+
+    dependencies:
+      z.array(
+        z.string()
+      ),
+
+    clarificationQuestions:
+      z.array(
+        z.string()
+      ),
+
+  });

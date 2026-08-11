@@ -16,12 +16,16 @@
   "type": "commonjs",
   "dependencies": {
     "@openai/agents": "^0.14.3",
+    "cors": "^2.8.6",
     "dotenv": "^17.4.2",
+    "express": "^5.2.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
     "@types/node": "^26.2.0",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",

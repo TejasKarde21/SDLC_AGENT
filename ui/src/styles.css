@@ -60,6 +60,16 @@ h1 {
   font-weight: 700;
 }
 
+.status-pill.loading {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-pill.error {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
 .card {
   background: #ffffff;
   border-radius: 26px;
@@ -172,6 +182,16 @@ tbody td {
   justify-content: flex-start;
 }
 
+.transcript-info {
+  margin-top: -12px;
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+.transcript-info .form-error {
+  margin: 8px 0 0;
+}
+
 button {
   border: none;
   border-radius: 14px;
@@ -217,4 +237,35 @@ button:not(.secondary) {
 .empty {
   color: #64748b;
   font-style: italic;
+}
+
+.loading-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #334155;
+}
+
+.loading-card h3 {
+  margin: 0 0 6px;
+}
+
+.loading-card p {
+  margin: 0;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 3px solid #cbd5e1;
+  border-top-color: #0f172a;
+  animation: spin 0.9s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
