@@ -25,6 +25,26 @@ interface RequirementOutput {
   clarificationQuestions: string[];
 }
 
+interface MeetingActionItem {
+  id: string;
+  task: string;
+  owner: string;
+  dueDate: string;
+}
+
+interface MeetingMinutesOutput {
+  meetingTitle: string;
+  meetingDate: string;
+  startTime: string;
+  endTime: string;
+  attendees: string[];
+  summary: string;
+  decisions: string[];
+  actionItems: MeetingActionItem[];
+  followUps: string[];
+  openQuestions: string[];
+}
+
 type LoadState =
   | "idle"
   | "loading"
@@ -45,6 +65,19 @@ const emptyOutput: RequirementOutput = {
   clarificationQuestions: [],
 };
 
+const emptyMeetingOutput: MeetingMinutesOutput = {
+  meetingTitle: "",
+  meetingDate: "",
+  startTime: "",
+  endTime: "",
+  attendees: [],
+  summary: "",
+  decisions: [],
+  actionItems: [],
+  followUps: [],
+  openQuestions: [],
+};
+
 function App() {
 
   const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -62,6 +95,11 @@ function App() {
   ] = useState<RequirementOutput | null>(null);
 
   const [
+    generatedMeetingMinutes,
+    setGeneratedMeetingMinutes
+  ] = useState<MeetingMinutesOutput | null>(null);
+
+  const [
     status,
     setStatus
   ] = useState<LoadState>("idle");
@@ -73,6 +111,9 @@ function App() {
 
   const output =
     generatedOutput ?? emptyOutput;
+
+  const meetingOutput =
+    generatedMeetingMinutes ?? emptyMeetingOutput;
 
 
   // -----------------------------
@@ -137,19 +178,15 @@ function App() {
       setError(null);
 
       setGeneratedOutput(null);
-
-
-      // Call backend BA Agent API
+      setGeneratedMeetingMinutes(null);
 
       const response = await fetch(
         "/api/requirements",
         {
           method: "POST",
-
           headers: {
             "Content-Type": "application/json",
           },
-
           body: JSON.stringify({
             clientRequirement,
           }),
@@ -183,10 +220,10 @@ function App() {
 
       // Receive BA Agent JSON
 
-      const result: RequirementOutput =
-        await response.json();
+      const result = await response.json();
 
-      setGeneratedOutput(result);
+      setGeneratedOutput(result.requirements);
+      setGeneratedMeetingMinutes(result.meetingMinutes);
 
       setStatus("success");
 
@@ -215,6 +252,7 @@ function App() {
   const handleClearOutput = () => {
 
     setGeneratedOutput(null);
+    setGeneratedMeetingMinutes(null);
 
     setError(null);
 
@@ -229,8 +267,10 @@ function App() {
   const handleClearAll = () => {
 
     setClientRequirement("");
+    setTranscriptLength(0);
 
     setGeneratedOutput(null);
+    setGeneratedMeetingMinutes(null);
 
     setError(null);
 
@@ -311,7 +351,7 @@ function App() {
           <textarea
             id="clientRequirement"
             ref={textAreaRef}
-            defaultValue={clientRequirement}
+            value={clientRequirement}
             onChange={(event) => {
               const value = event.target.value;
               setTranscriptLength(value.length);
@@ -415,21 +455,23 @@ Website API documentation has not yet been provided.
 
       {/* SHOW MESSAGE BEFORE GENERATION */}
 
-      {!generatedOutput && (
+      {status === "loading" && (
         <section className="card">
-          {status === "loading" ? (
-            <div className="loading-card">
-              <div className="spinner" />
-              <div>
-                <h3>Analyzing your requirement...</h3>
-                <p>This may take a few seconds while the BA agent generates the output.</p>
-              </div>
+          <div className="loading-card">
+            <div className="spinner" />
+            <div>
+              <h3>Analyzing your requirement...</h3>
+              <p>This may take a few seconds while the BA agent generates the output.</p>
             </div>
-          ) : (
-            <div className="empty">
-              Paste a client requirement above and click "Analyze Requirements".
-            </div>
-          )}
+          </div>
+        </section>
+      )}
+
+      {status !== "loading" && !generatedOutput && !generatedMeetingMinutes && (
+        <section className="card">
+          <div className="empty">
+            Paste a client requirement above and click "Analyze Requirements".
+          </div>
         </section>
       )}
 
@@ -437,18 +479,9 @@ Website API documentation has not yet been provided.
       {/* PROJECT SUMMARY */}
 
       {generatedOutput && (
-
         <>
-
-          <section
-            className="card summary-card"
-          >
-
-            <h2>
-              Project Summary
-            </h2>
-
-
+          <section className="card summary-card">
+            <h2>Project Summary</h2>
             <div className="grid-2">
 
               <div>
@@ -507,7 +540,6 @@ Website API documentation has not yet been provided.
             </div>
 
           </section>
-
 
           {/* FUNCTIONAL REQUIREMENTS */}
 
@@ -713,6 +745,102 @@ Website API documentation has not yet been provided.
           </section>
 
         </>
+      )}
+
+      {generatedMeetingMinutes && (
+
+          <section className="card">
+
+            <h2>
+              Meeting Minutes
+            </h2>
+
+            <div className="grid-2">
+
+              <div>
+                <strong>Meeting Title</strong>
+                <p>{meetingOutput.meetingTitle || "—"}</p>
+              </div>
+
+              <div>
+                <strong>Meeting Date</strong>
+                <p>{meetingOutput.meetingDate || "—"}</p>
+              </div>
+
+              <div>
+                <strong>Start Time</strong>
+                <p>{meetingOutput.startTime || "—"}</p>
+              </div>
+
+              <div>
+                <strong>End Time</strong>
+                <p>{meetingOutput.endTime || "—"}</p>
+              </div>
+
+            </div>
+
+            <div className="grid-card">
+
+              <div>
+                <h3>Attendees</h3>
+                {renderList(meetingOutput.attendees)}
+              </div>
+
+              <div>
+                <h3>Decisions</h3>
+                {renderList(meetingOutput.decisions)}
+              </div>
+
+            </div>
+
+            <div>
+              <h3>Summary</h3>
+              <p>{meetingOutput.summary || "No summary available."}</p>
+            </div>
+
+            <div>
+              <h3>Action Items</h3>
+              {meetingOutput.actionItems.length ? (
+                <div className="table-wrap">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Task</th>
+                        <th>Owner</th>
+                        <th>Due Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {meetingOutput.actionItems.map((item) => (
+                        <tr key={item.id}>
+                          <td>{item.id}</td>
+                          <td>{item.task}</td>
+                          <td>{item.owner}</td>
+                          <td>{item.dueDate}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                <div className="empty">No action items generated.</div>
+              )}
+            </div>
+
+            <div className="grid-card">
+              <div>
+                <h3>Follow Ups</h3>
+                {renderList(meetingOutput.followUps)}
+              </div>
+
+              <div>
+                <h3>Open Questions</h3>
+                {renderList(meetingOutput.openQuestions)}
+              </div>
+            </div>
+
+          </section>
 
       )}
 

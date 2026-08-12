@@ -13,9 +13,13 @@ import {
 import {
   requirementAgent
 } from "./agents/requirementAgent";
+import {
+  meetingAgent
+} from "./agents/meetingAgent";
 
 import {
-  requirementSchema
+  requirementSchema,
+  meetingSchema,
 } from "./schemas/requirementSchema";
 
 function extractJsonObject(text: string): string {
@@ -199,82 +203,64 @@ app.post(
 
 
       // --------------------------------
-      // Run BA Agent
+      // Run Requirement Agent
       // --------------------------------
 
-      const result =
+      const requirementResult =
         await runner.run(
           requirementAgent,
           clientRequirement
         );
 
+      const requirementRawOutput =
+        String(requirementResult.finalOutput);
 
-      console.log(
-        "\nRaw BA Agent Output:\n"
-      );
+      const requirementJsonText =
+        extractJsonObject(requirementRawOutput);
 
-      console.log(
-        result.finalOutput
-      );
+      const requirementParsedOutput =
+        JSON.parse(requirementJsonText);
 
+      const requirementValidatedOutput =
+        requirementSchema.parse(requirementParsedOutput);
+
+      console.log("\nValidated Requirement Output:\n");
+      console.dir(requirementValidatedOutput, { depth: null });
 
       // --------------------------------
-      // Convert output to string
+      // Run Meeting Minutes Agent
       // --------------------------------
 
-      const rawOutput =
-        String(
-          result.finalOutput
+      const meetingResult =
+        await runner.run(
+          meetingAgent,
+          clientRequirement
         );
 
-      console.log(
-        "\nRaw BA Agent Output:\n"
-      );
-      console.log(rawOutput);
+      const meetingRawOutput =
+        String(meetingResult.finalOutput);
 
+      const meetingJsonText =
+        extractJsonObject(meetingRawOutput);
 
-      // --------------------------------
-      // Extract valid JSON
-      // --------------------------------
+      const meetingParsedOutput =
+        JSON.parse(meetingJsonText);
 
-      const jsonText =
-        extractJsonObject(rawOutput);
+      const meetingValidatedOutput =
+        meetingSchema.parse(meetingParsedOutput);
 
-      const parsedOutput =
-        JSON.parse(
-          jsonText
-        );
-
-
-      // --------------------------------
-      // Zod Validation
-      // --------------------------------
-
-      const validatedOutput =
-        requirementSchema.parse(
-          parsedOutput
-        );
-
-
-      console.log(
-        "\nValidated BA Output:\n"
-      );
-
-      console.dir(
-        validatedOutput,
-        {
-          depth: null,
-        }
-      );
+      console.log("\nValidated Meeting Output:\n");
+      console.dir(meetingValidatedOutput, { depth: null });
 
 
       // --------------------------------
       // Return response to React
       // --------------------------------
 
-      return res.json(
-        validatedOutput
-      );
+      return res.json({
+        requirements: requirementValidatedOutput,
+        meetingMinutes: meetingValidatedOutput,
+      });
 
 
     } catch (error) {

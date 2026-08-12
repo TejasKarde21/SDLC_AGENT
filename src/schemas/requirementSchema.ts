@@ -72,3 +72,53 @@ export const requirementSchema =
       ),
 
   });
+
+export const meetingSchema =
+  z.object({
+
+    meetingTitle:
+      z.string(),
+
+    meetingDate:
+      z.string(),
+
+    startTime:
+      z.string(),
+
+    endTime:
+      z.string(),
+
+    attendees:
+      z.array(
+        z.string()
+      ),
+
+    summary:
+      z.string(),
+
+    decisions:
+      z.array(
+        z.string()
+      ),
+
+    actionItems:
+      z.array(
+        z.object({
+          id: z.string(),
+          task: z.string(),
+          owner: z.string(),
+          dueDate: z.string(),
+        })
+      ),
+
+    followUps:
+      z.array(
+        z.string()
+      ),
+
+    openQuestions:
+      z.array(
+        z.string()
+      ),
+
+  });

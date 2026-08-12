@@ -95,6 +95,14 @@ h1 {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
+.card h3 {
+  margin-top: 0;
+}
+
+.card p {
+  margin-top: 0.75rem;
+}
+
 strong {
   display: block;
   margin-bottom: 10px;
